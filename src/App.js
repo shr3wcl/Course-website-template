@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import Home from "./Component/home";
+import Login from "./Component/login";
+import Register from "./Component/register";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import Header from "./Component/header";
+import {useSelector} from "react-redux";
+import Chapters from "./Component/chapters";
+import Footer from "./Component/footer";
+import Lesson from "./Component/lesson";
+
 
 function App() {
+    const isLogin = useSelector(state => state.auth.login.success);
+
+    const ProtectedRoute = ({user, children}) => {
+        if (!user) {
+            return <Navigate to="/login" replace/>;
+        }
+        return children;
+    };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register/>}/>
+          <Route path="/chapters/:id" element={
+              <ProtectedRoute user={isLogin}><Chapters/></ProtectedRoute>
+          }/>
+          <Route path="/lesson/:id" element={
+              <ProtectedRoute user={isLogin}><Lesson/></ProtectedRoute>
+          }/>
+      </Routes>
+        <Footer/>
+    </Router>
   );
 }
 
