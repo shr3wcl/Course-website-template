@@ -34,7 +34,7 @@ function Header() {
                         <img className="rounded-[8px] flex-shrink-0 h-[38px] w-[38px] object-contain"
                              src="https://www.langoly.com/wp-content/uploads/2021/09/coursera-logo.png" alt="Couseraa"/>
                     </Link>
-                    <h4 className="text-black font-bold ml-[16px]">Khoá học lập trình</h4>
+                    <h4 className="text-black font-bold ml-[16px] md:inline-block hidden">Khoá học lập trình</h4>
                 </div>
                 <div className="flex-1 items-center flex justify-center">
                     <div>
@@ -62,7 +62,7 @@ function Header() {
                         <div className="flex-1 items-center justify-end flex">
                             <div id="navbar-actions-portal"></div>
                             <div>
-                                <button className="bg-transparent text-[#333] cursor-pointer font-semibold mr-[16px] p-[8px]"
+                                <button className="bg-transparent md:inline-block hidden text-[#333] cursor-pointer font-semibold mr-[16px] p-[8px]"
                                         aria-expanded="false">Khóa học của tôi
                                 </button>
                             </div>

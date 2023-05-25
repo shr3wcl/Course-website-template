@@ -17,12 +17,18 @@ const Chapters = () => {
     }, []);
     return (
         <div className={"px-[30px] my-24"}>
-            <div className={"mb-12"}>
-                <h1 className={"font-bold text-[30px] mb-4"}>{infoCourse.title}</h1>
-                <span className={""}>{infoCourse.desc}</span>
+            <div className={"flex flex-row justify-between px-2"}>
+                <div className={"mb-12 inline-block flex flex-col justify-center"}>
+                    <h1 className={"font-bold text-[30px]"}>{infoCourse.title}</h1>
+                    <span className={" mb-4"}>Giảng viên: {infoCourse.lecture}</span>
+                    <span className={""}>{infoCourse.desc}</span>
+                </div>
+                <div className={""}>
+                    <img className={"md:block hidden min-w-[360px] h-60 rounded-2xl"} src={"http://localhost:8000/"+infoCourse.img}/>
+                </div>
             </div>
             <div>
-                <h1 className={"font-bold text-[20px]"}>Nội dung bài học</h1>
+                <h1 className={"font-bold text-[20px] mb-4"}>Nội dung bài học</h1>
                 {data.length ? (
                     <div>
                         {data.map(each => (

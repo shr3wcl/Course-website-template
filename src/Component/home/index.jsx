@@ -4,6 +4,7 @@ import Header from "../header";
 import SliderBanner from "../slide";
 import Carousel from "../slide";
 import Course from "../Courses";
+import Subject from "../subject";
 function Home() {
     const navigate = useNavigate();
     function handleNavigate() {
@@ -12,7 +13,7 @@ function Home() {
     return (
         <>
             <Carousel/>
-            <Course/>
+            <Subject/>
         </>
     )
 }

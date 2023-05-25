@@ -1,11 +1,32 @@
 import {instance} from "../../createInstance";
 
-export const getCourse = async () => {
+export const getCourse = async (id) => {
     try{
-        const data = await instance.get("v1/course/public");
+        const data = await instance.get(`v1/course/public/${id}`);
         return data.data.data;
     }catch(err){
         return [];
+    }
+}
+
+export const getIDCourse = async () => {
+    try{
+        const res = await instance.get("v1/course/all");
+        return res.data.data;
+    }catch(err){
+        return [];
+    }
+}
+export const addCourse = async (data) => {
+    try{
+        const res = await instance.post("v1/course/storage", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        return res.data.message;
+    }catch(err){
+        return "Có lỗi";
     }
 }
 
@@ -42,5 +63,21 @@ export const detailLesson = async (id) => {
         return data.data.data;
     }catch(err){
         return {};
+    }
+}
+
+export const getCourseBySubjectID = async (id) => {
+    try{
+        const res = await instance.get(`v1/course/subject/course/${id}`);
+        return res.data.data;
+    }catch(err){
+        return [];
+    }
+}
+
+export const increaseStudent = async (id) => {
+    try{
+        const res = await instance.get(`v1/course/student/increase/${id}`);
+    }catch(err){
     }
 }
