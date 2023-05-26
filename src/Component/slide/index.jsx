@@ -36,7 +36,7 @@ const Carousel = () => {
                     >
                         <img
                             src={"http://localhost:8000/"+user.urlImg}
-                            className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-[70%] left-1/2"
+                            className=" block w-full"
                             alt="..."
                         />
                         <div className={"absolute left-20 bottom-10 text-gray-300 bg-gray-900 px-4 py-4 rounded-2xl bg-opacity-60"}>

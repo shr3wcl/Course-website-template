@@ -2,7 +2,7 @@ import "./style.css";
 
 const Footer = () => {
     return (
-        <footer className="Footer_wrapper__RAsdB mt-20">
+        <footer className="Footer_wrapper__RAsdB mt-20 bottom-0 right-0 left-0">
             <section className="index-module_grid__1q71E index-module_wide__3c1pI" style={{maxWidth: "1100px"}}>
                 <section className="index-module_row__-AHgh flex justify-around">
                     <section

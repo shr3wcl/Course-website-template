@@ -20,10 +20,11 @@ const Course = () => {
     });
     useEffect(() => {
         async function getData(){
-            setSubjectID(await getAllIdSubject());
+            const data = await getAllIdSubject();
+            setSubjectID(data);
+            setFormData({...formData, subjectID: data[0]?.id});
         }
         getData();
-        setFormData({...formData, subjectID: subjectID[0].id});
     }, []);
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -38,6 +39,7 @@ const Course = () => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData);
         addCourse(formData).then(msg => toast.success(msg)).catch(err => toast.error("Có lỗi"));
     }
 

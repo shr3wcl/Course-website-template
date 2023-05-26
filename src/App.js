@@ -11,6 +11,9 @@ import Footer from "./Component/footer";
 import Lesson from "./Component/lesson";
 import ErrorPage from "./Component/404";
 import AdminHome from "./Component/admin/App";
+import Profile from "./Component/profile";
+import EditInfo from "./Component/editInfo";
+import Password from "./Component/password";
 
 
 function App() {
@@ -39,6 +42,15 @@ function App() {
           }/>
           <Route path="/admin/*" element={
               <ProtectedRoute user={isLogin.currentUser?.admin}><AdminHome/></ProtectedRoute>
+          }/>
+          <Route path="/profile/:id" element={
+              <ProtectedRoute user={isLogin.success}><Profile/></ProtectedRoute>
+          }/>
+          <Route path="/edit/profile" element={
+              <ProtectedRoute user={isLogin.success}><EditInfo/></ProtectedRoute>
+          }/>
+          <Route path="/edit/password" element={
+              <ProtectedRoute user={isLogin.success}><Password/></ProtectedRoute>
           }/>
           <Route path={"/*"} element={<ErrorPage/>}/>
       </Routes>

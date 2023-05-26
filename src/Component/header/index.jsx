@@ -4,13 +4,27 @@ import "./style.css";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutSuccess} from "../../Redux/Slice/authSlice";
 import {toast} from "react-toastify";
+import Tippy from "@tippyjs/react";
 function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const isLogin = useSelector(state => state.auth.login);
     const [show, setShow] = useState(true);
     const [search, setSearch] = useState("");
+    const [checkSearch, setCheckSearch] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
 
+
+
+    function toggle() {
+        setIsOpen(!isOpen);
+    }
+
+    function selectOption(option) {
+        setSelectedOption(option);
+        setIsOpen(false);
+    }
     const handleLogout = () => {
         dispatch(logoutSuccess());
         toast.success("Đăng xuất thành công",{
@@ -25,7 +39,7 @@ function Header() {
     }
 
     return (
-        <header>
+        <header className={"sticky right-0 left-0 top-0 bg-white z-50"}>
             <div
                 className="sticky h-[66px] items-center border-b-2 border-solid flex text-sm px-[28px] right-0 left-0 top-0 z-20"
                 id="header">
@@ -44,8 +58,9 @@ function Header() {
                             <div
                                 className="bg-search-logo bg-[#fff] bg-center bg-[length:18px_18px] bg-no-repeat opacity-[.7] w-[32px] rounded-[50%] h-[32px]"></div>
                             <input className="border-0 caret-[#444] flex-1 h-full outline-0 px-4" spellCheck="false"
-                                   placeholder="Tìm kiếm khóa học, bài viết, video, ..." value={search} onChange={e=>setSearch(e.target.value)}/>
+                                   placeholder="Tìm kiếm khóa học, bài viết, video, ..." value={search} onChange={e=>setSearch(e.target.value)} onFocus={e => setCheckSearch(false)} />
                         </div>
+
                     </div>
                 </div>
                 {!isLogin.success ? (
@@ -80,7 +95,7 @@ function Header() {
                             <div className="ml-[12px]" aria-expanded="false" onClick={()=>setShow(!show)}>
                                 <div className="bg-transparent rounded-[50%]"><img
                                     className="cursor-pointer rounded-[50%] h-[28px] w-[28px] object-cover"
-                                    src="https://fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"
+                                    src={`http://localhost:8000/${isLogin.currentUser.avatar}`}
                                     alt={isLogin.currentUser.name}/></div>
                             </div>
                         </div>
@@ -89,7 +104,7 @@ function Header() {
                                 <div className="UserMenu_user__GXFLp">
                                     <div className="UserMenu_avatarWrapper__9ABYL">
                                         <div className="FallbackAvatar_avatar__gmj3S"><img
-                                            src="https://fullstack.edu.vn/static/media/fallback-avatar.155cdb2376c5d99ea151.jpg" alt={isLogin.currentUser.name}/>
+                                            src={`http://localhost:8000/${isLogin.currentUser.avatar}`} alt={isLogin.currentUser.name}/>
                                         </div>
                                     </div>
                                     <div className="UserMenu_info__UqeZT"><span
@@ -99,23 +114,23 @@ function Header() {
                                 </div>
                                 <hr/>
                                 <ul className="UserMenu_list__FI9-C">
-                                    <li><a className="UserMenu_item__NXwf1" href={"/@"+isLogin.currentUser.username}>Trang cá nhân</a></li>
+                                    <li><a className="UserMenu_item__NXwf1" href={"/profile/"+isLogin.currentUser._id}>Trang cá nhân</a></li>
+                                    <li><a className="UserMenu_item__NXwf1" href="/edit/profile">Chỉnh sửa thông tin</a></li>
+                                    <li><a className="UserMenu_item__NXwf1" href="/edit/password">Thay đổi mật khẩu</a></li>
                                 </ul>
                                 <hr/>
-                                <ul className="UserMenu_list__FI9-C">
-                                    <li><a className="UserMenu_item__NXwf1" href="/new-post">Viết blog</a></li>
-                                    <li><a className="UserMenu_item__NXwf1" href="/me/posts/drafts">Bài viết của tôi</a>
-                                    </li>
-                                </ul>
-                                <hr/>
-                                <ul className="UserMenu_list__FI9-C">
-                                    <li><a className="UserMenu_item__NXwf1" href="/me/bookmark/posts">Bài viết đã
-                                        lưu</a></li>
-                                </ul>
-                                <hr/>
+                                {/*<ul className="UserMenu_list__FI9-C">*/}
+                                {/*    <li><a className="UserMenu_item__NXwf1" href="/new-post">Viết blog</a></li>*/}
+                                {/*    <li><a className="UserMenu_item__NXwf1" href="/me/posts/drafts">Bài viết của tôi</a>*/}
+                                {/*    </li>*/}
+                                {/*</ul>*/}
+                                {/*<hr/>*/}
+                                {/*<ul className="UserMenu_list__FI9-C">*/}
+                                {/*    <li><a className="UserMenu_item__NXwf1" href="/me/bookmark/posts">Bài viết đã*/}
+                                {/*        lưu</a></li>*/}
+                                {/*</ul>*/}
+                                {/*<hr/>*/}
                                 <ul className="UserMenu_list__FI9-C" >
-                                    <li><a className="UserMenu_item__NXwf1" href="/settings/personal">Cài
-                                        đặt</a></li>
                                     <li><span className="UserMenu_item__NXwf1" onClick={handleLogout}>Đăng xuất</span></li>
                                 </ul>
                             </ul>

@@ -15,11 +15,13 @@ const Chapter = () => {
     });
     useEffect(() => {
         async function getData(){
-            setCourseIDs(await getIDCourse());
+            const data = await getIDCourse();
+            setCourseIDs(data);
+            setFormData({...formData, courseID: data[0]?._id})
+
         }
         getData();
 
-        setFormData({...formData, courseID: courseIDs[0]?._id})
     },[])
 
     const handleInputChange = (e) => {

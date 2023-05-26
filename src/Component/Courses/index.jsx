@@ -1,9 +1,11 @@
 import "./style.css";
 import {useEffect, useState} from "react";
-import {getCourse, increaseStudent} from "../../Redux/api/course";
+import {addMyCourse, getCourse, increaseStudent} from "../../Redux/api/course";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Course = (props) => {
+    const user = useSelector(state => state.auth.login.currentUser);
     const id = props.id;
     const [data, setData] = useState([]);
     useEffect( () => {
@@ -14,7 +16,14 @@ const Course = (props) => {
     }, []);
 
     const handleClick = (id) => {
-        increaseStudent(id)
+        if(user._id){
+            increaseStudent(id);
+            const form = {
+                idUser: user._id,
+                idCourse: id
+            }
+            addMyCourse(form);
+        }
     }
     return (
             <div>
@@ -25,7 +34,7 @@ const Course = (props) => {
                                      className="index-module_col__2EQm9 index-module_c-12__u7UXF index-module_m-4__30Uoi index-module_l-3__MjWvb">
                                 <div className="CommonItem_wrapper__1FbHi Home_courseItem__aIeZ4"><a
                                     className="CommonItem_thumb__ew8Jj CommonItem_has-link__VLLrX " title={each.title}
-                                    target="_self" href={'/chapters/'+each._id} onClick={_ => handleClick(each._id)}
+                                    target="_self" href={'/chapters/'+each._id}
                                     style={{background: `url("http://localhost:8000/${each.img}")`, backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
                                     <button className="Button_btn__RW1e2 CommonItem_cta-btn__OK+oX" onClick={_ => handleClick(each._id)}>Xem khoá học</button>
                                 </a><h3 className="CommonItem_title__EpYrE font-semibold mt-2">

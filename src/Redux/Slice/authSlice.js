@@ -81,6 +81,12 @@ const authSlice = createSlice({
         logoutFail: state => {
             state.login.isFetching = false;
             state.login.error = true;
+        },
+        changeAvatarSuccess: (state, action) => {
+            state.login.currentUser.avatar = action.payload;
+        },
+        changeNameSuccess: (state, action) => {
+            state.login.currentUser.name = action.payload;
         }
     }
 });
@@ -96,7 +102,9 @@ export const {
     logoutFail,
     logoutStart,
     logoutSuccess,
-    registerReset
+    registerReset,
+    changeAvatarSuccess,
+    changeNameSuccess
 } = authSlice.actions;
 
 export default authSlice.reducer;

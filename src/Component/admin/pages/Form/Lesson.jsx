@@ -12,12 +12,8 @@ const Lesson = () => {
     const [subjectID, setSubjectID] = useState([]);
     const [courseIDs, setCourseIDs] = useState([]);
     const [chapterIDs, setChapterIDs] = useState([]);
-    const [formData, setFormData] = useState({
-        chapterID: '',
-        name: '',
-        urlVideo: '',
-        time: ''
-    });
+    const [courseID, setCourseID] = useState('');
+
     const [chapterID, setChapterID] = useState('');
 
     const [name, setName] = useState('');
@@ -27,8 +23,12 @@ const Lesson = () => {
         async function getData(){
             const data = await getAllIdSubject();
             const res = await getCourseBySubjectID(data[0]?.id);
+            const ress = await getChapterByCourseID(res[0]?._id);
             setCourseIDs(res);
             setSubjectID(data);
+            setCourseID(res[0]?._id);
+            setChapterIDs(ress);
+            setChapterID(ress[0]._id);
         }
         getData();
     }, []);
@@ -39,6 +39,7 @@ const Lesson = () => {
             const res = await getChapterByCourseID(courseIDs[0]?._id);
             setChapterID(res[0]?._id);
             setCourseIDs(data);
+            setCourseID(data[0]?._id);
         }
         getData();
 
@@ -49,6 +50,7 @@ const Lesson = () => {
             const data = await getChapterByCourseID(e.target.value);
             setChapterID(data[0]._id);
             setChapterIDs(data);
+            setCourseID(e.target.value);
         }
         getData();
     }
@@ -63,7 +65,8 @@ const Lesson = () => {
             name,
             urlVideo,
             time,
-            chapterID
+            chapterID,
+            courseID
         }
         addLesson(data).then(msg => toast.success(msg)).catch(err => toast.error("Có lỗi"));
     }

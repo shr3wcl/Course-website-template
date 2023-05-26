@@ -81,3 +81,21 @@ export const increaseStudent = async (id) => {
     }catch(err){
     }
 }
+
+export const addMyCourse = async (data) => {
+    try{
+        const res = await instance.post("v1/course/my-course/add", data);
+        return res.data.message;
+    }catch(err){
+        return "Có lỗi";
+    }
+}
+
+export const getAllMyCourse = async (id) => {
+    try{
+        const res = await instance.get(`v1/course/my-course/all/${id}`);
+        return res.data.data;
+    }catch(err){
+        return "Có lỗi";
+    }
+}

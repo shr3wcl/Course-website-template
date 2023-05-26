@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-tailwind/react": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.5",
+    "@tippyjs/react": "^4.2.6",
     "apexcharts": "^3.40.0",
     "jsvectormap": "^1.5.3",
     "jwt-decode": "^3.1.2",

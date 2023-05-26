@@ -11,7 +11,7 @@ export const getSubject = async () => {
 
 export const addSubject = async (data) => {
     try{
-        const res = await instance.post("v1/course/subject/add");
+        const res = await instance.post("v1/course/subject/add", data);
         return res.data.message;
     }catch(err){
     }
