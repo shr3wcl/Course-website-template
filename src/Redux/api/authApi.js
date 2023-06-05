@@ -39,7 +39,7 @@ export const loginUser = async (user, dispatch, navigate) => {
             } else {
                 dispatch(loginFail(data.data.message));
             }
-        }).catch(err => dispatch(loginFail(err.response.data.message)));
+        }).catch(err => dispatch(loginFail(err.response?.data.message)));
     } catch (error) {
         dispatch(loginFail({ message: "Có lỗi xảy ra" }));
     }

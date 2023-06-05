@@ -29,7 +29,7 @@ const Course = (props) => {
             <div>
                 {data.length ? (
                     <div className={"flex flex-wrap flex-row w-f"}>
-                        {data.map(each => (
+                        {data?.map(each => (
                             <section key={each._id}
                                      className="index-module_col__2EQm9 index-module_c-12__u7UXF index-module_m-4__30Uoi index-module_l-3__MjWvb">
                                 <div className="CommonItem_wrapper__1FbHi Home_courseItem__aIeZ4"><a
@@ -55,7 +55,7 @@ const Course = (props) => {
                         ))}
                     </div>
                 ) : (
-                    <h1>Khoá học này đang được cập nhập...</h1>
+                    <h1>This course is being updated...</h1>
                 )}
             </div>
     )

@@ -26,7 +26,7 @@ export const addCourse = async (data) => {
         })
         return res.data.message;
     }catch(err){
-        return "Có lỗi";
+        return "Error";
     }
 }
 
@@ -87,7 +87,7 @@ export const addMyCourse = async (data) => {
         const res = await instance.post("v1/course/my-course/add", data);
         return res.data.message;
     }catch(err){
-        return "Có lỗi";
+        return "Error";
     }
 }
 
@@ -96,6 +96,15 @@ export const getAllMyCourse = async (id) => {
         const res = await instance.get(`v1/course/my-course/all/${id}`);
         return res.data.data;
     }catch(err){
-        return "Có lỗi";
+        return "Error";
+    }
+}
+
+export const search = async (key) => {
+    try {
+        const res = await instance.get(`v1/course/search/${key}`);
+        return res.data.data;
+    } catch (error) {
+        return [];
     }
 }

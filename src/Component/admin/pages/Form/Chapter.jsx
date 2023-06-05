@@ -18,7 +18,6 @@ const Chapter = () => {
             const data = await getIDCourse();
             setCourseIDs(data);
             setFormData({...formData, courseID: data[0]?._id})
-
         }
         getData();
 

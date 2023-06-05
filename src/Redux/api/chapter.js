@@ -17,3 +17,12 @@ export const getChapterByCourseID = async (id) => {
         return [];
     }
 }
+
+export const getAllChapter = async () => {
+    try {
+        const res = await instance.get(`v1/course/chapter/all`);
+        return res.data.data;
+    } catch (err) {
+        return [];
+    }
+}

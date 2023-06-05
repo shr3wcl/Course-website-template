@@ -14,6 +14,7 @@ import AdminHome from "./Component/admin/App";
 import Profile from "./Component/profile";
 import EditInfo from "./Component/editInfo";
 import Password from "./Component/password";
+import Search from "./Component/search";
 
 
 function App() {
@@ -51,7 +52,8 @@ function App() {
           }/>
           <Route path="/edit/password" element={
               <ProtectedRoute user={isLogin.success}><Password/></ProtectedRoute>
-          }/>
+          } />
+          <Route path="/search/:key" element={<Search/>} />
           <Route path={"/*"} element={<ErrorPage/>}/>
       </Routes>
         <Footer/>

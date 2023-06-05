@@ -8,3 +8,12 @@ export const addLesson = async (data) => {
         return "Có lỗi";
     }
 }
+
+export const getAllLesson = async () => {
+    try {
+        const res = await instance.get("v1/course/lesson/all");
+        return res.data.data;
+    } catch (err) {
+        return "Có lỗi";
+    }
+}

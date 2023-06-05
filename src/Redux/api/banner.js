@@ -9,7 +9,14 @@ export const getBanner = async () => {
         console.log(err)
     }
 }
-
+export const getAllBanner = async () => {
+    try {
+        const data = await instance.get("v1/course/banner/all");
+        return data.data.data;
+    } catch (err) {
+        console.log(err)
+    }
+}
 export const addBanner = async (data) => {
     try{
         const res = await instance.post("v1/course/banner/add", data, {

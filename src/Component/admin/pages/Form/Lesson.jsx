@@ -19,16 +19,17 @@ const Lesson = () => {
     const [name, setName] = useState('');
     const [urlVideo, setUrl] = useState('');
     const [time, setTime] = useState('');
+
     useEffect(() => {
         async function getData(){
             const data = await getAllIdSubject();
-            const res = await getCourseBySubjectID(data[0]?.id);
-            const ress = await getChapterByCourseID(res[0]?._id);
-            setCourseIDs(res);
             setSubjectID(data);
+            const res = await getCourseBySubjectID(data[0]?.id);
+            setCourseIDs(res);
+            const ress = await getChapterByCourseID(res[0]?._id);
             setCourseID(res[0]?._id);
             setChapterIDs(ress);
-            setChapterID(ress[0]._id);
+            setChapterID(ress[0]?._id);
         }
         getData();
     }, []);
@@ -36,10 +37,11 @@ const Lesson = () => {
     const handleSubjectChange = (e) => {
         async function getData(){
             const data = await getCourseBySubjectID(e.target.value);
-            const res = await getChapterByCourseID(courseIDs[0]?._id);
-            setChapterID(res[0]?._id);
             setCourseIDs(data);
             setCourseID(data[0]?._id);
+            const res = await getChapterByCourseID(data[0]?._id);
+            setChapterIDs(res);
+            setChapterID(res[0]?._id);
         }
         getData();
 
@@ -48,8 +50,8 @@ const Lesson = () => {
     const handleCourseChange = (e) => {
         async function getData(){
             const data = await getChapterByCourseID(e.target.value);
-            setChapterID(data[0]._id);
             setChapterIDs(data);
+            setChapterID(data[0]?._id);
             setCourseID(e.target.value);
         }
         getData();

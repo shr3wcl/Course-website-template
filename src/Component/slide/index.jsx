@@ -26,7 +26,7 @@ const Carousel = () => {
     return (
         <div id="indicators-carousel" className="relative w-full my-4" data-carousel="static">
             <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-                {data.map(user => (
+                {data?.map(user => (
                     <Link key={user._id}
                         to={user.extenalLink}
                         className={`duration-700 ease-in-out ${
@@ -44,7 +44,7 @@ const Carousel = () => {
                             {user.name}
                         </h1>
                         <span className={"mt-4 text-gray-500 hover:text-gray-300"}>
-                            Xem chi tiết
+                            See details
                         </span>
                         </div>
                     </Link>
@@ -52,7 +52,7 @@ const Carousel = () => {
 
             </div>
             <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
-                {data.map(each => (
+                {data?.map(each => (
                     <button
                         type="button"
                         className={`w-3 h-3 rounded-full ${

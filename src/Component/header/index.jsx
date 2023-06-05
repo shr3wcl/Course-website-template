@@ -15,7 +15,11 @@ function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(null);
 
-
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            navigate(`/search/${search}`);
+        }
+    };
 
     function toggle() {
         setIsOpen(!isOpen);
@@ -48,7 +52,7 @@ function Header() {
                         <img className="rounded-[8px] flex-shrink-0 h-[38px] w-[38px] object-contain"
                              src="https://www.langoly.com/wp-content/uploads/2021/09/coursera-logo.png" alt="Couseraa"/>
                     </Link>
-                    <h4 className="text-black font-bold ml-[16px] md:inline-block hidden">Khoá học lập trình</h4>
+                    <Link to="/" className="text-black font-bold ml-[16px] md:inline-block hidden">Courses</Link>
                 </div>
                 <div className="flex-1 items-center flex justify-center">
                     <div>
@@ -58,7 +62,7 @@ function Header() {
                             <div
                                 className="bg-search-logo bg-[#fff] bg-center bg-[length:18px_18px] bg-no-repeat opacity-[.7] w-[32px] rounded-[50%] h-[32px]"></div>
                             <input className="border-0 caret-[#444] flex-1 h-full outline-0 px-4" spellCheck="false"
-                                   placeholder="Tìm kiếm khóa học, bài viết, video, ..." value={search} onChange={e=>setSearch(e.target.value)} onFocus={e => setCheckSearch(false)} />
+                                placeholder="Search courses, articles, videos,..." value={search} onChange={e => setSearch(e.target.value)} onKeyDown={handleKeyDown} onFocus={e => setCheckSearch(false)} />
                         </div>
 
                     </div>
