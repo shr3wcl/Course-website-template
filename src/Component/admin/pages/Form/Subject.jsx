@@ -19,10 +19,10 @@ const Subject = () =>  {
             <Breadcrumb pageName="Banner"/>
             <Card color="transparent" className={"flex items-center"} shadow={false}>
                 <Typography variant="h4" color="blue-gray">
-                    Banner
+                    Subject
                 </Typography>
                 <Typography color="gray" className="mt-1 font-normal">
-                    Thêm banner
+                    New Subject
                 </Typography>
                 <form onSubmit={handleSubmit} >
                     <div className={"w-80"}>

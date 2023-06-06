@@ -38,7 +38,7 @@ const Course = (props) => {
                                     style={{background: `url("http://localhost:8000/${each.img}")`, backgroundRepeat: "no-repeat", backgroundSize: "cover"}}>
                                     <button className="Button_btn__RW1e2 CommonItem_cta-btn__OK+oX" onClick={_ => handleClick(each._id)}>Xem khoá học</button>
                                 </a><h3 className="CommonItem_title__EpYrE font-semibold mt-2">
-                                    <a target="_self"
+                                    <a target="_self" className="hover:text-gray-500"
                                        href={'/chapters/'+each._id}>{each.title}</a>
                                 </h3>
                                     <div className="CourseItem_students-count__92kIg">

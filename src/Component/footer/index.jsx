@@ -11,8 +11,8 @@ const Footer = () => {
                             <div>
                                 <div className="Footer_column-top__2kQ8J"><a href="/"><img
                                     className="Footer_top-logo__2i6Rn"
-                                    src="https://www.langoly.com/wp-content/uploads/2021/09/coursera-logo.png" alt="Cousera"/></a><h2
-                                    className="Footer_top-slogan__yvaAt">Học mọi thứ mà bạn muốn</h2></div>
+                                    src="http://localhost:8000/uploads/banner/logo.png" alt="English For Kids"/></a><h2
+                                        className="Footer_top-slogan__yvaAt">English For Kids</h2></div>
 
                             </div>
                         </div>
@@ -43,11 +43,10 @@ const Footer = () => {
                         <div className="Footer_column__Jllii">
                             <div><h2 className="Footer_heading__JLn-b"><a
                                                                           href=""
-                                                                          rel="noreferrer">CÔNG TY CỔ PHẦN CÔNG NGHỆ
-                                GIÁO DỤC</a></h2>
+                                rel="noreferrer">CÔNG TY TNHH MTV HP</a></h2>
                                 <ul className="Footer_list__pNU8w">
-                                    <li>Ngày thành lập: 01/05/2023</li>
-                                    <li>Lĩnh vực: Công nghệ, giáo dục, lập trình, đời sống.
+                                    <li>Ngày thành lập: 01/02/2023</li>
+                                    <li>Lĩnh vực: Giáo dục, học tập.
                                     </li>
                                 </ul>
                             </div>

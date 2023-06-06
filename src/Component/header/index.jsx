@@ -50,9 +50,9 @@ function Header() {
                 <div className="items-center flex flex-1">
                     <Link to="/" className={"flex"}>
                         <img className="rounded-[8px] flex-shrink-0 h-[38px] w-[38px] object-contain"
-                             src="https://www.langoly.com/wp-content/uploads/2021/09/coursera-logo.png" alt="Couseraa"/>
+                             src="http://localhost:8000/uploads/banner/logo.png" alt="Couseraa"/>
                     </Link>
-                    <Link to="/" className="text-black font-bold ml-[16px] md:inline-block hidden">Courses</Link>
+                    <Link to="/" className="text-black font-bold ml-[16px] md:inline-block hidden">English For Kids</Link>
                 </div>
                 <div className="flex-1 items-center flex justify-center">
                     <div>
@@ -82,7 +82,7 @@ function Header() {
                             <div id="navbar-actions-portal"></div>
                             <div>
                                 <button className="bg-transparent md:inline-block hidden text-[#333] cursor-pointer font-semibold mr-[16px] p-[8px]"
-                                        aria-expanded="false">Khóa học của tôi
+                                        aria-expanded="false">My courses
                                 </button>
                             </div>
                             <div>
@@ -118,24 +118,13 @@ function Header() {
                                 </div>
                                 <hr/>
                                 <ul className="UserMenu_list__FI9-C">
-                                    <li><a className="UserMenu_item__NXwf1" href={"/profile/"+isLogin.currentUser._id}>Trang cá nhân</a></li>
-                                    <li><a className="UserMenu_item__NXwf1" href="/edit/profile">Chỉnh sửa thông tin</a></li>
-                                    <li><a className="UserMenu_item__NXwf1" href="/edit/password">Thay đổi mật khẩu</a></li>
+                                        <li className="py-1"><a className="UserMenu_item__NXwf1 hover:text-gray-400" href={"/profile/"+isLogin.currentUser._id}>Profile</a></li>
+                                        <li className="py-1"><a className="UserMenu_item__NXwf1 hover:text-gray-400" href="/edit/profile">Edit profile</a></li>
+                                        <li className="py-1"><a className="UserMenu_item__NXwf1 hover:text-gray-400" href="/edit/password">Change password</a></li>
                                 </ul>
                                 <hr/>
-                                {/*<ul className="UserMenu_list__FI9-C">*/}
-                                {/*    <li><a className="UserMenu_item__NXwf1" href="/new-post">Viết blog</a></li>*/}
-                                {/*    <li><a className="UserMenu_item__NXwf1" href="/me/posts/drafts">Bài viết của tôi</a>*/}
-                                {/*    </li>*/}
-                                {/*</ul>*/}
-                                {/*<hr/>*/}
-                                {/*<ul className="UserMenu_list__FI9-C">*/}
-                                {/*    <li><a className="UserMenu_item__NXwf1" href="/me/bookmark/posts">Bài viết đã*/}
-                                {/*        lưu</a></li>*/}
-                                {/*</ul>*/}
-                                {/*<hr/>*/}
                                 <ul className="UserMenu_list__FI9-C" >
-                                    <li><span className="UserMenu_item__NXwf1" onClick={handleLogout}>Đăng xuất</span></li>
+                                    <li><span className="UserMenu_item__NXwf1 text-red-600 cursor-pointer hover:text-red-800" onClick={handleLogout}>Log out</span></li>
                                 </ul>
                             </ul>
                         </div>

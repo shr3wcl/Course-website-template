@@ -29,3 +29,25 @@ export const addBanner = async (data) => {
         console.log(err);
     }
 }
+
+export const getDetailBanner = async (id) => {
+    try {
+        const res = await instance.get(`v1/course/banner/detail/${id}`);
+        return res.data.data;
+    } catch (error) {
+        return {};
+    }
+}
+
+export const editBanner = async (data) => {
+    try {
+        const res = await instance.post("v1/course/banner/edit", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return res.data.message;
+    } catch (error) {
+        return "Có lỗi";
+    }
+}

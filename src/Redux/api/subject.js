@@ -30,8 +30,21 @@ export const getAllIdSubject = async () => {
 }
 export const detailSubject = async (id) => {
     try{
-        const res = await instance.get(`v1/course/subject/detail${id}`);
+        const res = await instance.get(`v1/course/subject/detail/${id}`);
         return res.data.data;
-    }catch(err){
+    } catch (err) {
+        return {};
+    }
+}
+export const editSubject = async (data) => {
+    try {
+        const res = await instance.post("v1/course/subject/edit", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        return res.data.message;
+    } catch (error) {
+        return "Error";
     }
 }
