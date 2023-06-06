@@ -29,7 +29,7 @@ const SubjectEdit = () => {
     }
     return (
         <DefaultLayout>
-            <Breadcrumb pageName="Subject" />
+            <Breadcrumb pageName="Edit / Subject" />
             <Card color="transparent" className={"flex items-center"} shadow={false}>
                 <Typography variant="h4" color="blue-gray">
                     Subject

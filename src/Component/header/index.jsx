@@ -10,6 +10,7 @@ function Header() {
     const navigate = useNavigate();
     const isLogin = useSelector(state => state.auth.login);
     const [show, setShow] = useState(true);
+    const [showMyCourse, setSMC] = useState(true);
     const [search, setSearch] = useState("");
     const [checkSearch, setCheckSearch] = useState(true);
     const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +83,7 @@ function Header() {
                             <div id="navbar-actions-portal"></div>
                             <div>
                                 <button className="bg-transparent md:inline-block hidden text-[#333] cursor-pointer font-semibold mr-[16px] p-[8px]"
-                                        aria-expanded="false">My courses
+                                        aria-expanded="false" onClick={_=>setSMC(!showMyCourse)}>My courses
                                 </button>
                             </div>
                             <div>

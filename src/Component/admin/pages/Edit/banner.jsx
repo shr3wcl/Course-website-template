@@ -45,7 +45,7 @@ const BannerEdit = () => {
 
     return (
         <DefaultLayout>
-            <Breadcrumb pageName="Banner" />
+            <Breadcrumb pageName="Edit / Banner" />
 
             <Card color="transparent" className={"flex items-center"} shadow={false}>
                 <Typography variant="h4" color="blue-gray">

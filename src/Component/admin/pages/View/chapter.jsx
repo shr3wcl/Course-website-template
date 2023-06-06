@@ -1,8 +1,9 @@
 import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumb';
 import { useEffect, useState } from "react";
-import { getAllChapter } from '../../../../Redux/api/chapter';
+import { deleteChapter, getAllChapter } from '../../../../Redux/api/chapter';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const ChapterView = () => {
     const [data, setData] = useState([]);
@@ -13,10 +14,13 @@ const ChapterView = () => {
         }
         getData();
     })
+    const handleDelete = (id) => {
+        deleteChapter(id).then(msg => toast.success("Success")).catch(err => toast.error("Error"));
+    }
     return (
         <DefaultLayout>
 
-            <Breadcrumb pageName="Chapter" />
+            <Breadcrumb pageName="View / Chapter" />
             <h1 className="font-bold my-4">Chapter</h1>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -61,7 +65,7 @@ const ChapterView = () => {
 
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex">
                                                 <Link to={`/admin/edit/chapter/${each._id}`} class="cursor-pointer text-indigo-600 mr-2 hover:text-indigo-900">Edit</Link>
-                                                <h1 class="cursor-pointer text-red-500 hover:text-red-700">Delete</h1>
+                                                <h1 class="cursor-pointer text-red-500 hover:text-red-700" onClick={_=>handleDelete(each?._id)}>Delete</h1>
                                             </td>
                                         </tr>
                                     ))}

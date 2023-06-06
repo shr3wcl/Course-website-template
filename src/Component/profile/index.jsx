@@ -23,13 +23,15 @@ const Profile = () => {
         <div className={"flex flex-col items-center"}>
             <div className={"relative"}>
 
-                <img src={"https://fullstack.edu.vn/static/media/cover-profile.3fb9fed576da4b28386a.png"}/>
-                <div className={"absolute bottom-[-70px] left-10 w-40 h-40 bg-white rounded-[50%] flex"}>
-                    <img className={"rounded-[50%] p-1"} src={`http://localhost:8000/${user.avatar}`}/>
+                <div className="flex justify-center"><img className="w-[80%] " src={"http://localhost:8000/uploads/banner/banner-profile.png"} /></div>
+                <div className="md:flex md:flex-col">
+                    <div className={"absolute md:bottom-[-70px] bottom-[-20vw] md:left-[20vw] left-[38%] w-40 h-40 bg-white rounded-[50%] flex"}>
+                        <img className={"rounded-[50%] p-1"} src={`http://localhost:8000/${user.avatar}`} />
+                    </div>
+                    <h1 className={"md:absolute md:inline-block hidden left-[30rem] text-3xl bottom-[-50px] font-semibold"}>{userInfo.name}</h1>
                 </div>
-                <h1 className={"absolute left-[220px] text-3xl bottom-[-50px] font-semibold"}>{userInfo.name}</h1>
             </div>
-            <div className={"mt-20 mx-32 "}>
+            <div className={"md:mt-32 md:mx-32 mx-10 mt-40"}>
                 <section className="w-fit flex">
                     <section
                         className="index-module_col__2EQm9 index-module_c-12__u7UXF index-module_m-12__2CxUL index-module_l-5__2UHWy">

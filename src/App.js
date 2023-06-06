@@ -31,31 +31,33 @@ function App() {
     <Router>
       <Header />
       <ToastContainer />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register/>}/>
-          <Route path="/chapters/:id" element={
-              <ProtectedRoute user={isLogin.success}><Chapters/></ProtectedRoute>
-          }/>
-          <Route path="/lesson/:id" element={
-              <ProtectedRoute user={isLogin.success}><Lesson/></ProtectedRoute>
-          }/>
-          <Route path="/admin/*" element={
-              <ProtectedRoute user={isLogin.currentUser?.admin}><AdminHome/></ProtectedRoute>
-          }/>
-          <Route path="/profile/:id" element={
-              <ProtectedRoute user={isLogin.success}><Profile/></ProtectedRoute>
-          }/>
-          <Route path="/edit/profile" element={
-              <ProtectedRoute user={isLogin.success}><EditInfo/></ProtectedRoute>
-          }/>
-          <Route path="/edit/password" element={
-              <ProtectedRoute user={isLogin.success}><Password/></ProtectedRoute>
-          } />
-          <Route path="/search/:key" element={<Search/>} />
-          <Route path={"/*"} element={<ErrorPage/>}/>
-      </Routes>
+          <div className="min-h-screen">
+              <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/chapters/:id" element={
+                      <ProtectedRoute user={isLogin.success}><Chapters /></ProtectedRoute>
+                  } />
+                  <Route path="/lesson/:id" element={
+                      <ProtectedRoute user={isLogin.success}><Lesson /></ProtectedRoute>
+                  } />
+                  <Route path="/admin/*" element={
+                      <ProtectedRoute user={isLogin.currentUser?.admin}><AdminHome /></ProtectedRoute>
+                  } />
+                  <Route path="/profile/:id" element={
+                      <ProtectedRoute user={isLogin.success}><Profile /></ProtectedRoute>
+                  } />
+                  <Route path="/edit/profile" element={
+                      <ProtectedRoute user={isLogin.success}><EditInfo /></ProtectedRoute>
+                  } />
+                  <Route path="/edit/password" element={
+                      <ProtectedRoute user={isLogin.success}><Password /></ProtectedRoute>
+                  } />
+                  <Route path="/search/:key" element={<Search />} />
+                  <Route path={"/*"} element={<ErrorPage />} />
+              </Routes>
+      </div>
         <Footer/>
     </Router>
   );

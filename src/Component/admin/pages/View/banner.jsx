@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumb';
-import { getAllBanner } from "../../../../Redux/api/banner";
+import { deleteBanner, getAllBanner } from "../../../../Redux/api/banner";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const BannerView = () => {
     const [data, setData] = useState([]);
@@ -12,11 +13,15 @@ const BannerView = () => {
             setData(await getAllBanner());
         }
         getData();
-    })
+    }, [data]);
+
+    const handleDelete = (id) => {
+        deleteBanner(id).then(msg => toast.success("Success")).catch(err => toast.error("Error"));
+    }
     return (
         <DefaultLayout>
 
-            <Breadcrumb pageName="Banner" />
+            <Breadcrumb pageName="View / Banner" />
             <h1 className="font-bold my-4">Banner</h1>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -64,8 +69,8 @@ const BannerView = () => {
                                                 <div class="text-sm text-gray-900">{each.status ? "Public" : "Private"}</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex">
-                                                <Link to={`/admin/edit/banner/${each._id}`} class="cursor-pointer text-indigo-600 mr-2 hover:text-indigo-900">Edit</Link>
-                                                <h1 class="cursor-pointer text-red-500 hover:text-red-700">Delete</h1>
+                                                <Link to={`/admin/edit/banner/${each?._id}`} class="cursor-pointer text-indigo-600 mr-2 hover:text-indigo-900">Edit</Link>
+                                                <h1 class="cursor-pointer text-red-500 hover:text-red-700" onClick={_=>handleDelete(each?._id)}>Delete</h1>
                                             </td>
                                         </tr>
                                     ))}

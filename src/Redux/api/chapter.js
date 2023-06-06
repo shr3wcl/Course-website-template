@@ -26,3 +26,30 @@ export const getAllChapter = async () => {
         return [];
     }
 }
+
+export const detailChapter = async (id) => {
+    try {
+        const res = await instance.get(`v1/course/chapter/detail/${id}`);
+        return res.data.data;
+    } catch (err) {
+        return {};
+    }
+}
+
+export const editChapter = async (data) => {
+    try {
+        const res = await instance.post("v1/course/chapter/edit", data);
+        return res.data.message;
+    } catch (error) {
+        return "Error";
+    }
+}
+
+export const deleteChapter = async (id) => {
+    try {
+        const res = await instance.get(`v1/course/chapter/delete/${id}`);
+        return res.data.data;
+    } catch (err) {
+        return "Error";
+    }
+}

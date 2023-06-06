@@ -48,3 +48,12 @@ export const editSubject = async (data) => {
         return "Error";
     }
 }
+
+export const deleteSubject = async (id) => {
+    try {
+        const res = await instance.delete(`v1/course/subject/delete/${id}`);
+        return res.data.message;
+    } catch (error) {
+        return "Error";
+    }
+}

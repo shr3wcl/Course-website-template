@@ -48,6 +48,15 @@ export const editBanner = async (data) => {
         });
         return res.data.message;
     } catch (error) {
-        return "Có lỗi";
+        return "Error";
+    }
+}
+
+export const deleteBanner = async (id) => {
+    try {
+        const res = await instance.delete(`v1/course/banner/delete/${id}`);
+        return res.data.message;
+    } catch (error) {
+        return "Error";
     }
 }

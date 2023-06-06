@@ -1,8 +1,9 @@
 import DefaultLayout from '../../layout/DefaultLayout';
 import Breadcrumb from '../../components/Breadcrumb';
 import { useEffect, useState } from "react";
-import { getAllLesson } from '../../../../Redux/api/lesson';
+import { deleteLesson, getAllLesson } from '../../../../Redux/api/lesson';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const LessonView = () => {
     const [data, setData] = useState([]);
@@ -13,10 +14,13 @@ const LessonView = () => {
         }
         getData();
     })
+    const handleDelete = (id) => {
+        deleteLesson(id).then(msg => toast.success("Success")).catch(err => toast.error("Error"));
+    }
     return (
         <DefaultLayout>
 
-            <Breadcrumb pageName="Lesson" />
+            <Breadcrumb pageName="View / Lesson" />
             <h1 className="font-bold my-4">Lesson</h1>
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -71,7 +75,7 @@ const LessonView = () => {
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium flex">
                                                 <Link to={`/admin/edit/lesson/${each._id}`} class="cursor-pointer text-indigo-600 mr-2 hover:text-indigo-900">Edit</Link>
-                                                <h1 class="cursor-pointer text-red-500 hover:text-red-700">Delete</h1>
+                                                <h1 class="cursor-pointer text-red-500 hover:text-red-700" onClick={_=>handleDelete(each?._id)}>Delete</h1>
                                             </td>
                                         </tr>
                                     ))}

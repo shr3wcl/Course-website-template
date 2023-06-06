@@ -320,7 +320,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              Ảnh bìa
+                              Banner
                             </NavLink>
                           </li>
                           <li>
@@ -331,7 +331,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 (isActive && '!text-white')
                               }
                             >
-                              Chủ đề
+                              Subject
                             </NavLink>
                           </li>
                           <li>
@@ -342,7 +342,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     (isActive && '!text-white')
                                 }
                             >
-                              Khoá học
+                              Course
                             </NavLink>
                           </li>
                           <li>
@@ -353,7 +353,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     (isActive && '!text-white')
                                 }
                             >
-                              Chương học
+                              Chapter
                             </NavLink>
                           </li>
                           <li>
@@ -364,7 +364,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                     (isActive && '!text-white')
                                 }
                             >
-                              Bài học
+                              Lesson
                             </NavLink>
                           </li>
                         </ul>

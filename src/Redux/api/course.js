@@ -108,3 +108,25 @@ export const search = async (key) => {
         return [];
     }
 }
+
+export const editCourse = async (data) => {
+    try {
+        const res = await instance.post("v1/course/edit", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        return res.data.message;
+    } catch (error) {
+        return "Error";
+    }
+}
+
+export const deleteCourse = async (id) => {
+    try {
+        const res = await instance.delete(`v1/course/delete/${id}`);
+        return res.data.message;
+    } catch (error) {
+        return "Error";
+    }
+}
