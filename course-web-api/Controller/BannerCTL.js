@@ -15,23 +15,19 @@ const BannerCTL = {
         try {
             const banners = await Banner.find();
             return res.status(200).json({ data: banners });
-        }catch(err){
+        } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
         }
     },
 
     addBanner: async (req, res) => {
         try {
-            const imageUrl = req.file.path;
-            const urlImg = imageUrl.replace(/\\/g, '/');
-
+            const imageUrl = req.file.path.replace(/\\/g, '/');
             const { name, status, extenalLink } = req.body;
-            if (!name || !urlImg) {
-                return res.status(401).json({ message: "Tiêu đề và ảnh không được để trống" });
+            if (!name || !imageUrl) {
+                return res.status(400).json({ message: "Tiêu đề và ảnh không được để trống" });
             }
-            await new Banner({
-                name, status, urlImg, extenalLink
-            }).save();
+            await Banner.create({ name, status, urlImg: imageUrl, extenalLink });
             return res.status(200).json({ message: "Đã thêm banner" });
         } catch (error) {
             console.log(error);
@@ -41,11 +37,11 @@ const BannerCTL = {
 
     detail: async (req, res) => {
         try {
-            const banner = await Banner.find({ _id: req.params.id });
+            const banner = await Banner.findById(req.params.id);
             if (banner) {
-                return res.status(200).json({ data: banner[0] });
+                return res.status(200).json({ data: banner });
             }
-            return res.status(403).json({ message: "Banner không tồn tại" });
+            return res.status(404).json({ message: "Banner không tồn tại" });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
         }
@@ -53,26 +49,20 @@ const BannerCTL = {
 
     edit: async (req, res) => {
         try {
-            const { id, name, status, linkImg, extenalLink } = req.body; 
+            const { id, name, status, linkImg, extenalLink } = req.body;
             if (!name) {
-                return res.status(401).json({ message: "Tên và ảnh không được để trống" });
+                return res.status(400).json({ message: "Tên và ảnh không được để trống" });
             }
-            const banner = await Banner.findOne({ _id: id });
-            if (!banner) {
-                return res.status(401).json({ message: "Banner này không tồn tại" });
+            const imageUrl = req.file ? req.file.path.replace(/\\/g, '/') : linkImg;
+            const updatedBanner = await Banner.findOneAndUpdate(
+                { _id: id },
+                { name, status, urlImg: imageUrl, extenalLink },
+                { new: true }
+            );
+            if (updatedBanner) {
+                return res.status(200).json({ message: "Thay đổi banner thành công" });
             }
-            banner.name = name;
-            banner.status = status;
-            banner.extenalLink = extenalLink;
-            if (banner?.urlImg != linkImg) {
-                const imageUrl = req.file.path;
-                const urlImg = imageUrl.replace(/\\/g, '/');
-                banner.urlImg = urlImg;
-            } else {
-                banner.urlImg = linkImg;
-            }
-            await banner.save();
-            return res.status(200).json({ message: "Thay đổi banner thành công" });
+            return res.status(404).json({ message: "Banner không tồn tại" });
         } catch (error) {
             return res.status(500).json({ message: "Có lỗi xảy ra" });
         }
@@ -81,10 +71,13 @@ const BannerCTL = {
     delete: async (req, res) => {
         try {
             const { id } = req.body;
-            await Banner.findByIdAndDelete(id);
-            res.status(200).json({ message: "Success" });
+            const deletedBanner = await Banner.findByIdAndDelete(id);
+            if (deletedBanner) {
+                return res.status(200).json({ message: "Success" });
+            }
+            return res.status(404).json({ message: "Banner không tồn tại" });
         } catch (error) {
-            res.status(500).json({ message: "Error" });
+            return res.status(500).json({ message: "Có lỗi" });
         }
     }
 }

@@ -5,7 +5,7 @@ const CourseCTL = {
     getBySubjectID: async (req, res) => {
         try {
             const { id } = req.params;
-            const courses = await Course.find({subjectID: id});
+            const courses = await Course.find({ subjectID: id });
             res.status(200).json({ data: courses });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
@@ -13,19 +13,18 @@ const CourseCTL = {
     },
     getAll: async (req, res) => {
         try {
-            const course = await Course.find();
-            return res.status(200).json({ data: course });
+            const courses = await Course.find();
+            res.status(200).json({ data: courses });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
-
         }
     },
 
     getPublic: async (req, res) => {
         try {
             const { id } = req.params;
-            const course = await Course.find({ status: true, subjectID: id });
-            return res.status(200).json({ data: course });
+            const courses = await Course.find({ status: true, subjectID: id });
+            res.status(200).json({ data: courses });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
         }
@@ -33,62 +32,56 @@ const CourseCTL = {
 
     add: async (req, res) => {
         try {
-            const imageUrl = req.file.path;
-            const img = imageUrl.replace(/\\/g, '/');
-            const { subjectID, title, desc, price, lecture, students, status } = req.body;
-            console.log(req.body);
-            await new Course({
-                subjectID, title, desc, price, lecture, students, status, img
-            }).save();
+            const { subjectID, title, desc, price, lecture, status } = req.body;
+            const imageUrl = req.file.path.replace(/\\/g, '/');
+            const newCourse = new Course({ subjectID, title, desc, price, lecture, status, img: imageUrl });
+            await newCourse.save();
             await increaseQuan(subjectID);
-            return res.status(200).json({ message: "Thêm thành công" });
+            res.status(200).json({ message: "Thêm thành công" });
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ message: "Có lỗi" });
+            res.status(500).json({ message: "Có lỗi" });
         }
     },
 
     detail: async (req, res) => {
         try {
             const { id } = req.params;
-            const course = await Course.findOne({ _id: id });
-            return res.status(200).json({ data: course });
+            const course = await Course.findById(id);
+            res.status(200).json({ data: course });
         } catch (error) {
-            res.status(500).json({message: "Có lỗi"})
+            res.status(500).json({ message: "Có lỗi" });
         }
     },
 
     edit: async (req, res) => {
         try {
             const { id, subjectID, title, desc, price, lecture, status, linkImg } = req.body;
-            const course = await Course.findOne({ _id: id });
+            const course = await Course.findById(id);
             course.subjectID = subjectID;
             course.title = title;
             course.desc = desc;
             course.price = price;
             course.lecture = lecture;
             course.status = status;
-            if (linkImg == course.img) {
-                await course.save();
-            } else {
-                const imageUrl = req.file.path;
-                const urlImg = imageUrl.replace(/\\/g, '/');
-                course.img = urlImg;
+            if (linkImg !== course.img) {
+                const imageUrl = req.file.path.replace(/\\/g, '/');
+                course.img = imageUrl;
             }
-            res.status(200).json({message: "Success"})
+            await course.save();
+            res.status(200).json({ message: "Success" });
         } catch (error) {
-            res.status(500).json({ message: "Error" })
+            res.status(500).json({ message: "Error" });
         }
     },
 
     increaseStudent: async (req, res) => {
         try {
             const { id } = req.params;
-            const course = await Course.findOne({ _id: id });
+            const course = await Course.findById(id);
             course.students++;
             await course.save();
-            res.status(500).json({ message: "Thành công" });
-
+            res.status(200).json({ message: "Thành công" });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
         }
@@ -102,6 +95,6 @@ const CourseCTL = {
             res.status(500).json({ message: "Error" });
         }
     }
-}
+};
 
 module.exports = CourseCTL;

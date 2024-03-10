@@ -53,7 +53,7 @@ function Header() {
                         <img className="rounded-[8px] flex-shrink-0 h-[38px] w-[38px] object-contain"
                              src="http://localhost:8000/uploads/banner/logo.png" alt="Couseraa"/>
                     </Link>
-                    <Link to="/" className="text-black font-bold ml-[16px] md:inline-block hidden">English For Kids</Link>
+                    <Link to="/" className="text-black font-bold ml-[16px] md:inline-block hidden">FCoursera</Link>
                 </div>
                 <div className="flex-1 items-center flex justify-center">
                     <div>

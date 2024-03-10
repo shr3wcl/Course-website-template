@@ -11,8 +11,8 @@ const Footer = () => {
                             <div>
                                 <div className="Footer_column-top__2kQ8J"><a href="/"><img
                                     className="Footer_top-logo__2i6Rn"
-                                    src="http://localhost:8000/uploads/banner/logo.png" alt="English For Kids"/></a><h2
-                                        className="Footer_top-slogan__yvaAt">English For Kids</h2></div>
+                                    src="http://localhost:8000/uploads/banner/logo.png" alt="FCousera"/></a><h2
+                                        className="Footer_top-slogan__yvaAt">FCousera</h2></div>
 
                             </div>
                         </div>

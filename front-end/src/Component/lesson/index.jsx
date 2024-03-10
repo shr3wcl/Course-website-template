@@ -15,13 +15,13 @@ const Lesson = () => {
         const getData = async () => {
             const data = await detailLesson(id);
             setData(data);
-            const res = await getChapterByCourseID(data.courseID);
+            const res = await getChapterByCourseID(data.courseID._id);
             setChapter(res);
         }
         getData();
     }, []);
     const date = moment(data.updatedAt);
-    const formattedDate = date.format('[tháng] M [năm] YYYY');
+    const formattedDate = date.format('HH:MM [ngày] D [tháng] M [năm] YYYY');
     return (
         <div className={"flex"}>
             <div className={"md:w-9/12 w-full"}>
@@ -35,7 +35,7 @@ const Lesson = () => {
                     />
                 </div>
                 <div className={"px-[10%] py-10"}>
-                    <h1 className={"font-bold text-4xl"}>{data.name}</h1>
+                    <h1 className={"font-bold text-4xl my-4"}>{data.name}</h1>
                     <span className={"mt-12 text-gray-500"}>Cập nhập vào {formattedDate}</span>
                 </div>
             </div>

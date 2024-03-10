@@ -6,20 +6,25 @@ const SubjectCTL = {
             const subjects = await Subject.find();
             res.status(200).json({ data: subjects });
         } catch (error) {
-            res.status(500).json({message: "Có lỗi"})
+            console.log(error);
+            res.status(500).json({ message: "Có lỗi khi lấy dữ liệu chủ đề" });
         }
     },
 
     add: async (req, res) => {
         try {
             const { name } = req.body;
-            await Subject({
-                name
-            }).save();
+
+            // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+            if (!name) {
+                return res.status(400).json({ message: "Tên chủ đề không được để trống" });
+            }
+
+            await Subject({ name }).save();
             res.status(200).json({ message: "Thêm chủ đề thành công" });
         } catch (error) {
             console.log(error);
-            res.status(500).json({ message: "Có lỗi" });
+            res.status(500).json({ message: "Có lỗi khi thêm chủ đề" });
         }
     },
 
@@ -27,39 +32,64 @@ const SubjectCTL = {
         try {
             const { id } = req.params;
             const subject = await Subject.findOne({ _id: id });
+            if (!subject) {
+                return res.status(404).json({ message: "Không tìm thấy chủ đề" });
+            }
             res.status(200).json({ data: subject });
         } catch (error) {
-            res.status(500).json({ message: "Có lỗi" });
+            console.log(error);
+            res.status(500).json({ message: "Có lỗi khi lấy chi tiết chủ đề" });
         }
     },
 
     edit: async (req, res) => {
         try {
             const { id, name } = req.body;
+
+            // Kiểm tra tính hợp lệ của dữ liệu đầu vào
+            if (!name) {
+                return res.status(400).json({ message: "Tên chủ đề không được để trống" });
+            }
+
             const subject = await Subject.findOne({ _id: id });
+            if (!subject) {
+                return res.status(404).json({ message: "Không tìm thấy chủ đề" });
+            }
+
             subject.name = name;
             await subject.save();
-            res.status(200).json({ message: "Success" });
+            res.status(200).json({ message: "Chỉnh sửa chủ đề thành công" });
         } catch (error) {
-            res.status(500).json({ message: "Error" });
-        }
-    },
-    increaseQuan: async (id) => {
-        try {
-            const subject = await Subject.find({ _id: id });
-            subject.quanCourse++;
-            await subject.save();
-        } catch (error) {
-            res.status(500).json({ message: "Error" });
+            console.log(error);
+            res.status(500).json({ message: "Có lỗi khi chỉnh sửa chủ đề" });
         }
     },
 
-    delete: async (req,res) => {
+    increaseQuan: async (id) => {
         try {
-            await Subject.findByIdAndDelete(req.params.id);
-            res.status(200).json({ message: "Success" });
+            const subject = await Subject.findById(id);
+            if (!subject) {
+                console.log("Không tìm thấy chủ đề");
+                return;
+            }
+            subject.quanCourse++;
+            await subject.save();
         } catch (error) {
-            res.status(500).json({ message: "Error" });
+            console.log(error);
+        }
+    },
+
+    delete: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const subject = await Subject.findByIdAndDelete(id);
+            if (!subject) {
+                return res.status(404).json({ message: "Không tìm thấy chủ đề" });
+            }
+            res.status(200).json({ message: "Xóa chủ đề thành công" });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Có lỗi khi xóa chủ đề" });
         }
     }
 }

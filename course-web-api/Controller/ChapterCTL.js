@@ -9,6 +9,7 @@ const ChapterCTL = {
             res.status(500).json({ message: "Có lỗi" });
         }
     },
+
     getChapter: async (req, res) => {
         try {
             const { id } = req.params;
@@ -25,48 +26,40 @@ const ChapterCTL = {
             const chapter = await Chapter.findOne({ _id: id }).populate('courseID', 'title _id');
             return res.status(200).json({ data: chapter });
         } catch (error) {
-            res.status(500).json({ message: "Error" });
+            res.status(500).json({ message: "Có lỗi" });
         }
     },
 
     edit: async (req, res) => {
         try {
             const { id, name, courseID, quanLesson } = req.body;
-            console.log(req.body);
             const chapter = await Chapter.findOne({ _id: id });
             chapter.name = name;
             chapter.courseID = courseID;
             chapter.quanLesson = quanLesson;
             await chapter.save();
-            res.status(200).json({ message: "Success" });
-
+            return res.status(200).json({ message: "Thay đổi chapter thành công" });
         } catch (error) {
-            console.log(error);
-            res.status(500).json({ message: "Error" });
+            res.status(500).json({ message: "Có lỗi" });
         }
-     },
+    },
 
     getChapterByCourseId: async (req, res) => {
         try {
             const { id } = req.params;
-            console.log(id);
             const chapters = await Chapter.find({ courseID: id });
-            console.log(chapters);
             res.status(200).json({ data: chapters });
         } catch (error) {
             res.status(500).json({ message: "Có lỗi" });
         }
     },
+
     addChapter: async (req, res) => {
         try {
             const { name, courseID, quanLesson } = req.body;
-            console.log(req.body);
-            await Chapter({
-                name: name, courseID, quanLesson
-            }).save();
+            await Chapter.create({ name, courseID, quanLesson });
             return res.status(200).json({ message: "Thêm thành công" });
         } catch (error) {
-            console.log(error);
             res.status(500).json({ message: "Có lỗi" });
         }
     },
@@ -74,10 +67,10 @@ const ChapterCTL = {
     increase: async (id) => {
         try {
             const chapter = await Chapter.findOne({ _id: id });
-            let quan = chapter.quanLesson;
-            quan++;
-            chapter.quanLesson = quan;
-            await chapter.save();
+            if (chapter) {
+                chapter.quanLesson++;
+                await chapter.save();
+            }
         } catch (error) {
             console.log(error);
         }
@@ -86,9 +79,9 @@ const ChapterCTL = {
     delete: async (req, res) => {
         try {
             await Chapter.findByIdAndDelete(req.params.id);
-            res.status(200).json({ message: "Success" });
+            res.status(200).json({ message: "Xóa thành công" });
         } catch (error) {
-            res.status(500).json({ message: "Error" });
+            res.status(500).json({ message: "Có lỗi" });
         }
     }
 }
